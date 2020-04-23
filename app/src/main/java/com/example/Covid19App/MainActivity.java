@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         counryNameSearch = findViewById(R.id.countryNameSearch);
         searchButton = findViewById(R.id.searchButton);
         result = findViewById(R.id.result);
+        String countrySearch = counryNameSearch.getText().toString();
         Covid19 covid19 = new Covid19();
         String content;
         try {
@@ -89,23 +90,32 @@ public class MainActivity extends AppCompatActivity {
             String newRecovered = "";
             String totalRecovered = "";
             String date = "";
+            String result1 = "";
+            JSONObject part = new JSONObject();
 
             for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject part = jsonArray.getJSONObject(i);
+                part = jsonArray.getJSONObject(i);
                 countryName = part.getString("Country");
-                newConfirmed = part.getString("NewConfirmed");
-                totalConfirmed = part.getString("TotalConfirmed");
-                newDeaths = part.getString("NewDeaths");
-                totalDeaths = part.getString("TotalDeaths");
-                newRecovered = part.getString("NewRecovered");
-                totalRecovered = part.getString("TotalRecovered");
-                date = part.getString("Date");
+                if (countryName.equals(countrySearch)) {
+                    break;
+                }
             }
+
+            newConfirmed = part.getString("NewConfirmed");
+            totalConfirmed = part.getString("TotalConfirmed");
+            newDeaths = part.getString("NewDeaths");
+            totalDeaths = part.getString("TotalDeaths");
+            newRecovered = part.getString("NewRecovered");
+            totalRecovered = part.getString("TotalRecovered");
+            date = part.getString("Date");
 
             Log.i("CountryName", countryName);
             Log.i("newConfirmedData", newConfirmed);
 
-
+            result1 = "County" + countryName + "\nNew confirmed" + newConfirmed + "\ntotal Confirmed"
+                    + totalConfirmed + "\nnew Deaths" + newDeaths + "\ntotal Deaths" + totalDeaths
+                    + "\nnew Recovered" + newRecovered + "\ntotal Recovered" + totalRecovered + "\nUpdate date" + date;
+            result.setText(result1);
 
         } catch (Exception e) {
             e.printStackTrace();
