@@ -61,10 +61,12 @@ public class MainActivity extends AppCompatActivity {
 
     TextView counryNameSearch;
     Button searchButton;
+    TextView result;
 
     public void search(View view) {
-        counryNameSearch = findViewById(R.id.counryNameSearch);
+        counryNameSearch = findViewById(R.id.countryNameSearch);
         searchButton = findViewById(R.id.searchButton);
+        result = findViewById(R.id.result);
         Covid19 covid19 = new Covid19();
         String content;
         try {
