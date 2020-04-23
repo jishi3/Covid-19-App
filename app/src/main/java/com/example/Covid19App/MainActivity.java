@@ -78,43 +78,72 @@ public class MainActivity extends AppCompatActivity {
             JSONObject jsonObject = new JSONObject(content);
             String global = jsonObject.getString("Global");
             Log.i("GlobalData", global);
-            //country data are in array
-            String country = jsonObject.getString("Countries");
-            JSONArray jsonArray = new JSONArray(country);
 
-            String countryName = "";
-            String newConfirmed = "";
-            String totalConfirmed = "";
-            String newDeaths = "";
-            String totalDeaths = "";
-            String newRecovered = "";
-            String totalRecovered = "";
-            String date = "";
+
             String result1 = "";
-            JSONObject part = new JSONObject();
+            //If Global typed
 
-            for (int i = 0; i < jsonArray.length(); i++) {
-                part = jsonArray.getJSONObject(i);
-                countryName = part.getString("Country");
-                if (countryName.equals(countrySearch)) {
-                    break;
+            if (countrySearch.equals("Global")) {
+                JSONObject globalData = new JSONObject(global);
+                String newConfirmed = globalData.getString("NewConfirmed");
+                String totalConfirmed = globalData.getString("TotalConfirmed");
+                String newDeaths = globalData.getString("NewDeaths");
+                String totalDeaths = globalData.getString("TotalDeaths");
+                String newRecovered = globalData.getString("NewRecovered");
+                String totalRecovered = globalData.getString("TotalRecovered");
+                String date = jsonObject.getString("Date");
+                result1 = "\nNew confirmed: " + newConfirmed + "\nTotal Confirmed: "
+                        + totalConfirmed + "\nNew Deaths: " + newDeaths + "\nTotal Deaths: " + totalDeaths
+                        + "\nNew Recovered: " + newRecovered + "\nTotal Recovered: " + totalRecovered + "\nUpdate date: " + date;
+            } else {
+
+
+                //country data are in array
+                String country = jsonObject.getString("Countries");
+                JSONArray jsonArray = new JSONArray(country);
+
+                String countryName = "";
+                String newConfirmed = "";
+                String totalConfirmed = "";
+                String newDeaths = "";
+                String totalDeaths = "";
+                String newRecovered = "";
+                String totalRecovered = "";
+                String date = "";
+
+
+                boolean flag = false;
+
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject part = jsonArray.getJSONObject(i);
+                    countryName = part.getString("Country");
+                    newConfirmed = part.getString("NewConfirmed");
+                    totalConfirmed = part.getString("TotalConfirmed");
+                    newDeaths = part.getString("NewDeaths");
+                    totalDeaths = part.getString("TotalDeaths");
+                    newRecovered = part.getString("NewRecovered");
+                    totalRecovered = part.getString("TotalRecovered");
+                    date = part.getString("Date");
+                    if (countryName.equals(countrySearch)) {
+                        flag = true;
+                        break;
+                    }
+                }
+
+                if (flag == false) {
+                    result1 = "The Country Does Not Exist. Please Type Another One";
+                } else {
+
+
+                    Log.i("CountryName", countryName);
+                    Log.i("newConfirmedData", newConfirmed);
+
+                    result1 = "County: " + countryName + "\nNew confirmed: " + newConfirmed + "\nTotal Confirmed: "
+                            + totalConfirmed + "\nNew Deaths: " + newDeaths + "\nTotal Deaths: " + totalDeaths
+                            + "\nNew Recovered: " + newRecovered + "\nTotal Recovered: " + totalRecovered + "\nUpdate date: " + date;
+
                 }
             }
-
-            newConfirmed = part.getString("NewConfirmed");
-            totalConfirmed = part.getString("TotalConfirmed");
-            newDeaths = part.getString("NewDeaths");
-            totalDeaths = part.getString("TotalDeaths");
-            newRecovered = part.getString("NewRecovered");
-            totalRecovered = part.getString("TotalRecovered");
-            date = part.getString("Date");
-
-            Log.i("CountryName", countryName);
-            Log.i("newConfirmedData", newConfirmed);
-
-            result1 = "County" + countryName + "\nNew confirmed" + newConfirmed + "\ntotal Confirmed"
-                    + totalConfirmed + "\nnew Deaths" + newDeaths + "\ntotal Deaths" + totalDeaths
-                    + "\nnew Recovered" + newRecovered + "\ntotal Recovered" + totalRecovered + "\nUpdate date" + date;
             result.setText(result1);
 
         } catch (Exception e) {
