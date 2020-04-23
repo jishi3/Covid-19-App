@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <EditText
-        android:id="@+id/counryNameSearch"
+        android:id="@+id/editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="120dp"
@@ -15,21 +15,7 @@
         android:gravity="center"
         android:hint="Enter a Country Name"
         android:inputType="textPersonName"
-        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/searchButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:onClick="search"
-        android:text="Search"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/counryNameSearch"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="@+id/counryNameSearch"
-        app:layout_constraintTop_toBottomOf="@+id/counryNameSearch" />
 </androidx.constraintlayout.widget.ConstraintLayout>
