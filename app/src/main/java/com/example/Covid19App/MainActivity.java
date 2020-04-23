@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -56,11 +59,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    TextView counryNameSearch;
+    Button searchButton;
 
+    public void search(View view) {
+        counryNameSearch = findViewById(R.id.counryNameSearch);
+        searchButton = findViewById(R.id.searchButton);
         Covid19 covid19 = new Covid19();
         String content;
         try {
@@ -104,5 +108,12 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
     }
 }
