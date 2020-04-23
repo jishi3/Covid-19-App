@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -68,8 +69,36 @@ public class MainActivity extends AppCompatActivity {
             Log.i("Content", content);
             //get data as JsonObject
             JSONObject jsonObject = new JSONObject(content);
-            String global = jsonObject.getString("global");
+            String global = jsonObject.getString("Global");
             Log.i("GlobalData", global);
+            //country data are in array
+            String country = jsonObject.getString("Countries");
+            JSONArray jsonArray = new JSONArray(country);
+
+            String countryName = "";
+            String newConfirmed = "";
+            String totalConfirmed = "";
+            String newDeaths = "";
+            String totalDeaths = "";
+            String newRecovered = "";
+            String totalRecovered = "";
+            String date = "";
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject part = jsonArray.getJSONObject(i);
+                countryName = part.getString("Country");
+                newConfirmed = part.getString("NewConfirmed");
+                totalConfirmed = part.getString("TotalConfirmed");
+                newDeaths = part.getString("NewDeaths");
+                totalDeaths = part.getString("TotalDeaths");
+                newRecovered = part.getString("NewRecovered");
+                totalRecovered = part.getString("TotalRecovered");
+                date = part.getString("Date");
+            }
+
+            Log.i("CountryName", countryName);
+            Log.i("newConfirmedData", newConfirmed);
+
 
 
         } catch (Exception e) {
