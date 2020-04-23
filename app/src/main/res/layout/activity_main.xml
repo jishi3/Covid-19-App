@@ -7,15 +7,28 @@
     tools:context=".MainActivity">
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/countryName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="124dp"
+        android:layout_marginBottom="52dp"
         android:ems="10"
         android:gravity="center"
         android:hint="Enter a Country Name"
         android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:text="@android:string/search_go"
+        app:layout_constraintEnd_toEndOf="@+id/countryName"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="@+id/countryName"
+        app:layout_constraintTop_toBottomOf="@+id/countryName" />
 </androidx.constraintlayout.widget.ConstraintLayout>
